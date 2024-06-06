@@ -18,12 +18,12 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer movieId;
     private String movieTitle;
-    private String movieDesc;
+    /*private String movieDesc;
     private String movieTrailerLink;
     private String moviePoster;
     private List<String> genres;
     private List<String> movieCast;
-    private String movieDirector;
+    private String movieDirector;*/
     private LocalDate movieReleaseDate;
 
     @OneToMany(mappedBy = "movie")

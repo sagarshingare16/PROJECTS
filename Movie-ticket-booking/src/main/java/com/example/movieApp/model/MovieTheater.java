@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,6 +15,7 @@ public class MovieTheater {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer theaterId;
     private String theaterLocation;
+    private Integer availableSeats;
 
     @ManyToOne
     private Movie movie;

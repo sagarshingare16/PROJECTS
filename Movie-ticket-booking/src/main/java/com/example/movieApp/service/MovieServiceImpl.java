@@ -1,6 +1,7 @@
 package com.example.movieApp.service;
 
 import com.example.movieApp.model.Movie;
+import com.example.movieApp.model.MovieTheater;
 import com.example.movieApp.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +13,9 @@ import java.util.List;
 @Service
 public class MovieServiceImpl implements MovieService{
 
-    @Autowired
+    @Autowired(required = false)
     MovieRepository movieRepository;
+
 
     @Override
     public List<Movie> filterMovies(LocalDate date, String location) {
@@ -44,4 +46,20 @@ public class MovieServiceImpl implements MovieService{
             return filterMovies(date,location);
         }
     }
+
+    @Override
+    public void bookTickets(Integer movieId, Integer ticketsCount) {
+        Movie movie= movieRepository.findById(movieId).orElseThrow(() -> new IllegalArgumentException("Invalid Movie Id" + movieId));
+        MovieTheater movieTheater = new MovieTheater();
+        int availableSeats = movieTheater.getAvailableSeats();
+
+        if (ticketsCount > availableSeats) {
+            throw new IllegalArgumentException("No seats available at this time.");
+        }
+        availableSeats -= ticketsCount;
+        movieTheater.setAvailableSeats(availableSeats);
+
+        movieRepository.save(movie);
+    }
+
 }
