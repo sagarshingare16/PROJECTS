@@ -1,7 +1,6 @@
 package com.example.movieApp.service;
 
 import com.example.movieApp.model.Movie;
-import com.example.movieApp.model.MovieTheater;
 import com.example.movieApp.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +37,10 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     public List<Movie> getAllMovies(LocalDate date, String location) {
-        return List.of();
+        if(date == null && location == null){
+            return movieRepository.findAll();
+        }else {
+            return filterMovies(date,location);
+        }
     }
 }
