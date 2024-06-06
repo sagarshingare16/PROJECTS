@@ -1,12 +1,11 @@
 package com.example.movieApp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,4 +16,7 @@ public class MovieTheater {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer theaterId;
     private String theaterLocation;
+
+    @ManyToOne
+    private Movie movie;
 }

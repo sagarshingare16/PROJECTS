@@ -25,9 +25,10 @@ public class MovieServiceImpl implements MovieService{
             if (date != null && !movie.getMovieReleaseDate().isEqual(date)) {
                 match = false;
             }
+            /*
             if (location != null && !movie.getMovieTheater().getTheaterLocation().toUpperCase().contains(location.toLowerCase())) {
                 match = false;
-            }
+            }*/
             if (match) {
                 filteredMovies.add(movie);
             }
