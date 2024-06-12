@@ -1,0 +1,169 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom, #dcdcdc 50%, #e9e9e9 50%);
+    font-family: 'Roboto', sans-serif;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main {
+    width: 300px;
+    min-height: 300px;
+    background-color: #f7f7f7;
+    border-radius: 30px;
+    box-shadow: 0 30px 50px rgba(85, 85, 85, 0.3);
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+main form {
+    border: 1px solid rgba(85, 85, 85, 0.2);
+    display: flex;
+    border-radius: 30px;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+main form input, 
+main form button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    padding: 10px;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+main form input {
+    padding-left: 15px;
+}
+
+main form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 15px;
+    cursor: pointer;
+    color: #333;
+}
+
+main form button:hover {
+    background-color: rgba(85, 85, 85, 0.1);
+}
+
+main form i {
+    opacity: 0.7;
+    font-size: 1.2em;
+}
+
+main .result {
+    padding-top: 20px;
+    text-align: center;
+}
+
+main .result .name {
+    font-weight: bold;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+main .temperature img {
+    width: 150px;
+    filter: drop-shadow(0 10px 50px rgba(85, 85, 85, 0.5));
+}
+
+main .temperature figcaption {
+    font-size: 3em;
+    color: #ff5722;
+}
+
+main .description {
+    padding: 10px 0 30px;
+    color: #666;
+    font-style: italic;
+}
+
+main ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+main li {
+    background-color: #f78a55;
+    color: #fff;
+    border-radius: 10px;
+    padding: 20px 10px;
+    background-image: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.2) 50%);
+    font-weight: bold;
+    font-size: small;
+    text-align: center;
+}
+
+main ul li i {
+    font-size: 2em;
+    margin: 20px 0;
+    display: block !important;
+}
+
+main li:nth-child(2) {
+    background-color: #b56291;
+}
+
+main li:nth-child(3) {
+    background-color: #48567b;
+}
+
+main.error {
+    animation: errorEffect 0.3s linear 1;
+}
+
+@keyframes errorEffect {
+    0% {
+        transform: translate(10px, 5px);
+    }
+    25% {
+        transform: translate(-5px, 0);
+    }
+    50% {
+        transform: translate(8px, 2px);
+    }
+    75% {
+        transform: translate(-2px, 5px);
+    }
+    100% {
+        transform: translate(0, 0); 
+    }
+}
+
+@media (max-width: 400px) {
+    main {
+        width: 100%;
+        padding: 20px;
+    }
+
+    main .temperature img {
+        width: 120px;
+    }
+
+    main .temperature figcaption {
+        font-size: 2.5em;
+    }
+
+    main li {
+        padding: 15px 10px;
+        font-size: smaller;
+    }
+}

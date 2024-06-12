@@ -10,6 +10,6 @@ import java.util.List;
 public interface MovieService {
     List<Movie> filterMovies(LocalDate date,String location);
     List<Movie> getAllMovies(LocalDate date,String location);
-    void bookTickets(Integer movieId,Integer ticketsCount);
+    void bookTickets(Integer movieId,Integer ticketsCount,Integer theaterId);
 
 }

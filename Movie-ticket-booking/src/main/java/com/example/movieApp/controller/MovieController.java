@@ -21,11 +21,12 @@ public class MovieController {
             @RequestParam(required = false) String location){
         return movieService.getAllMovies(date,location);
     }
-    @PostMapping("/booking/{movieId}/{ticketCount}")
+    @PostMapping("/booking/{movieId}/{ticketCount}/{theaterId}")
     public void bookTicket(
             @PathVariable("movieId") Integer movieId,
-            @PathVariable("ticketCount") Integer ticketCount){
-        movieService.bookTickets(movieId,ticketCount);
+            @PathVariable("ticketCount") Integer ticketCount,
+            @PathVariable("theaterId") Integer theaterId){
+        movieService.bookTickets(movieId,ticketCount,theaterId);
     }
 
 }

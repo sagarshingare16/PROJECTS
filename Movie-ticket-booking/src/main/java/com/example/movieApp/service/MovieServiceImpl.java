@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class MovieServiceImpl implements MovieService{
 
-    @Autowired(required = false)
+    @Autowired
     MovieRepository movieRepository;
 
 
@@ -48,16 +48,18 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
-    public void bookTickets(Integer movieId, Integer ticketsCount) {
-        Movie movie= movieRepository.findById(movieId).orElseThrow(() -> new IllegalArgumentException("Invalid Movie Id" + movieId));
-        MovieTheater movieTheater = new MovieTheater();
-        int availableSeats = movieTheater.getAvailableSeats();
+    public void bookTickets(Integer movieId, Integer ticketsCount,Integer theaterId) {
+        Movie movie= movieRepository.findById(movieId).get();
+        System.out.println(movie);
+        TheaterService theaterService = new TheaterService();
+
+        int availableSeats = theaterService.getAvailableSetCounts(theaterId);
+        System.out.println(availableSeats);
 
         if (ticketsCount > availableSeats) {
             throw new IllegalArgumentException("No seats available at this time.");
         }
-        availableSeats -= ticketsCount;
-        movieTheater.setAvailableSeats(availableSeats);
+        //availableSeats -= ticketsCount;
 
         movieRepository.save(movie);
     }
