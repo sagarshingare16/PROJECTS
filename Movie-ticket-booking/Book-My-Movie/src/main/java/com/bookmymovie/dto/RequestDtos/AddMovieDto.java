@@ -5,7 +5,6 @@ import com.bookmymovie.enums.Genre;
 import com.bookmymovie.enums.Language;
 import lombok.Data;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Data

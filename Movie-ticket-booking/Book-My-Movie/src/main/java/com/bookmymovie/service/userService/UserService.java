@@ -2,7 +2,7 @@ package com.bookmymovie.service.userService;
 
 import com.bookmymovie.Transformer.TicketTransformer;
 import com.bookmymovie.Transformer.UserTransformer;
-import com.bookmymovie.dto.RequestDtos.UserEntryDto;
+import com.bookmymovie.dto.RequestDtos.AddUserDto;
 import com.bookmymovie.dto.ResponseDtos.TicketResponseDto;
 import com.bookmymovie.entity.Ticket;
 import com.bookmymovie.entity.User;
@@ -22,11 +22,11 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public String addUser(UserEntryDto userEntryDto) throws UserAlreadyExistsWithEmail {
-        if(userRepository.findByEmailId(userEntryDto.getEmailId()) != null) {
+    public String addUser(AddUserDto addUserDto) throws UserAlreadyExistsWithEmail {
+        if(userRepository.findByEmailId(addUserDto.getEmailId()) != null) {
             throw new UserAlreadyExistsWithEmail();
         }
-        User user = UserTransformer.userDtoToUser(userEntryDto);
+        User user = UserTransformer.userDtoToUser(addUserDto);
 
         userRepository.save(user);
         return "User Saved Successfully";

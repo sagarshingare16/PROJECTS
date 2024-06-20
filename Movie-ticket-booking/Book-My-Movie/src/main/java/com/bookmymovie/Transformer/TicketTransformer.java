@@ -16,8 +16,10 @@ public class TicketTransformer {
                 .address(show.getTheater().getAddress())
                 .theaterName(show.getTheater().getName())
                 .movieName(show.getMovie().getMovieName())
-                .date(LocalDate.parse(show.getDate()))
-                .time(LocalTime.parse(show.getTime()))
+                .date(show.getDate())
+                .time(LocalTime.from(show.getTime()))
+                /*.date(LocalDate.parse(show.getDate()))
+                .time(LocalTime.parse(show.getTime()))*/
                 .totalPrice(ticket.getTotalTicketsPrice())
                 .build();
     }

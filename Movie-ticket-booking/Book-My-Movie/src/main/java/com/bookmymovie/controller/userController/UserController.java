@@ -1,7 +1,7 @@
 package com.bookmymovie.controller.userController;
 
-import com.bookmymovie.dto.RequestDtos.TicketEntryDto;
-import com.bookmymovie.dto.RequestDtos.UserEntryDto;
+import com.bookmymovie.dto.RequestDtos.AddUserDto;
+import com.bookmymovie.dto.RequestDtos.BookTicketDto;
 import com.bookmymovie.dto.ResponseDtos.TicketResponseDto;
 import com.bookmymovie.service.TicketService;
 import com.bookmymovie.service.userService.UserService;
@@ -23,13 +23,13 @@ public class UserController {
     private TicketService ticketService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody UserEntryDto userEntryDto){
-        return new ResponseEntity<>(userService.addUser(userEntryDto), HttpStatus.CREATED);
+    public ResponseEntity<String> registerUser(@RequestBody AddUserDto addUserDto){
+        return new ResponseEntity<>(userService.addUser(addUserDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/book-ticket")
-    public ResponseEntity<TicketResponseDto> ticketBooking(@RequestBody TicketEntryDto ticketEntryDto) {
-        return new ResponseEntity<>(ticketService.ticketBooking(ticketEntryDto),HttpStatus.CREATED);
+    public ResponseEntity<TicketResponseDto> ticketBooking(@RequestBody BookTicketDto bookTicketDto) {
+        return new ResponseEntity<>(ticketService.ticketBooking(bookTicketDto),HttpStatus.CREATED);
     }
 
     @GetMapping("/allTickets/{userId}")

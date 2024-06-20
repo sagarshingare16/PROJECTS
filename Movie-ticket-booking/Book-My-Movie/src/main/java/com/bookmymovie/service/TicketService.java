@@ -2,7 +2,7 @@ package com.bookmymovie.service;
 
 
 import com.bookmymovie.Transformer.TicketTransformer;
-import com.bookmymovie.dto.RequestDtos.TicketEntryDto;
+import com.bookmymovie.dto.RequestDtos.BookTicketDto;
 import com.bookmymovie.dto.ResponseDtos.TicketResponseDto;
 import com.bookmymovie.entity.Show;
 import com.bookmymovie.entity.ShowSeat;
@@ -41,7 +41,7 @@ public class TicketService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public TicketResponseDto ticketBooking(TicketEntryDto ticketEntryDto) throws RequestedSeatAreNotAvailable, UserDoesNotExists, ShowDoesNotExists{
+    public TicketResponseDto ticketBooking(BookTicketDto ticketEntryDto) throws RequestedSeatAreNotAvailable, UserDoesNotExists, ShowDoesNotExists{
         // check user present
         Optional<Show> showOpt = showRepository.findById(ticketEntryDto.getShowId());
         if(showOpt.isEmpty()) {
@@ -86,14 +86,14 @@ public class TicketService {
         showRepository.save(show);
 
         // write mail and send to user Id
-        sendMailToUser(user, show,seats);
+        //sendMailToUser(user, show,seats);
 
 
         // build Ticket Response Dto
         return TicketTransformer.returnTicket(show, ticket);
     }
 
-    private void sendMailToUser(User user, Show show, String seats) {
+    /*private void sendMailToUser(User user, Show show, String seats) {
         String body = "Dear"+user.getName()+",\n\nI hope this email finds you well. \n" +
                 "I am writing to inform you that your ticket has been successfully booked. \n" +
                 "We are pleased to confirm that your preferred date and time and more details have been secured.\n \n" +
@@ -111,7 +111,7 @@ public class TicketService {
         message.setTo(user.getEmailId());
         message.setSubject("Ticket Successfully Booked!");
         mailSender.send(message);
-    }
+    }*/
 
     private Boolean isSeatAvailable(List<ShowSeat> showSeatList, List<String> requestSeats) {
         for(ShowSeat showSeat : showSeatList) {

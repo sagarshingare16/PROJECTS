@@ -1,12 +1,12 @@
 package com.bookmymovie.Transformer;
 
 
-import com.bookmymovie.dto.RequestDtos.TheaterEntryDto;
+import com.bookmymovie.dto.RequestDtos.AddTheaterDto;
 import com.bookmymovie.entity.Theater;
 
 public class TheaterTransformer {
 
-    public static Theater theaterDtoToTheater(TheaterEntryDto entryDto) {
+    public static Theater theaterDtoToTheater(AddTheaterDto entryDto) {
         return Theater.builder()
                 .name(entryDto.getName())
                 .address(entryDto.getAddress())

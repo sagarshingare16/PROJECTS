@@ -2,7 +2,6 @@ package com.bookmymovie.controller.adminController;
 
 import com.bookmymovie.dto.RequestDtos.*;
 import com.bookmymovie.service.adminService.AdminService;
-import com.bookmymovie.service.userService.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,27 +19,27 @@ public class AdminController {
 
 
     @PostMapping("/addMovie")
-    public ResponseEntity<String> addNewMovie(@RequestBody MovieEntryDto movieEntryDto){
-        return new ResponseEntity<>(adminService.addMovie(movieEntryDto), HttpStatus.CREATED);
+        public ResponseEntity<String> addNewMovie(@RequestBody AddMovieDto addMovieDto){
+        return new ResponseEntity<>(adminService.addMovie(addMovieDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/addShow")
-    public ResponseEntity<String> addShow(@RequestBody ShowEntryDto showEntryDto) {
-        return new ResponseEntity<>(adminService.addShow(showEntryDto),HttpStatus.CREATED);
+    public ResponseEntity<String> addShow(@RequestBody AddShowDto addShowDto) {
+        return new ResponseEntity<>(adminService.addShow(addShowDto),HttpStatus.CREATED);
     }
 
     @PostMapping("/associateSeats")
-    public ResponseEntity<String> associateShowSeats(@RequestBody ShowSeatEntryDto showSeatEntryDto) {
-        return new ResponseEntity<>(adminService.associateShowSeats(showSeatEntryDto),HttpStatus.CREATED);
+    public ResponseEntity<String> associateShowSeats(@RequestBody AddSeatDto addSeatDto) {
+        return new ResponseEntity<>(adminService.associateShowSeats(addSeatDto),HttpStatus.CREATED);
     }
 
     @PostMapping("/addTheater")
-    public ResponseEntity<String> addTheater(@RequestBody TheaterEntryDto theaterEntryDto) {
-        return new ResponseEntity<>(adminService.addTheater(theaterEntryDto),HttpStatus.CREATED);
+    public ResponseEntity<String> addTheater(@RequestBody AddTheaterDto addTheaterDto) {
+        return new ResponseEntity<>(adminService.addTheater(addTheaterDto),HttpStatus.CREATED);
     }
 
     @PostMapping("/addTheaterSeat")
-    public ResponseEntity<String> addTheaterSeat(@RequestBody TheaterSeatEntryDto entryDto) {
-        return new ResponseEntity<>(adminService.addTheaterSeat(entryDto),HttpStatus.CREATED);
+    public ResponseEntity<String> addTheaterSeat(@RequestBody AddTheaterSeatDto addTheaterSeatDto) {
+        return new ResponseEntity<>(adminService.addTheaterSeat(addTheaterSeatDto),HttpStatus.CREATED);
     }
 }

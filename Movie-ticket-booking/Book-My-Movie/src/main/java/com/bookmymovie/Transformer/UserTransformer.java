@@ -1,13 +1,13 @@
 package com.bookmymovie.Transformer;
 
 
-import com.bookmymovie.dto.RequestDtos.UserEntryDto;
+import com.bookmymovie.dto.RequestDtos.AddUserDto;
 import com.bookmymovie.dto.ResponseDtos.ReturnUserDto;
 import com.bookmymovie.entity.User;
 
 public class UserTransformer {
 
-    public static User userDtoToUser(UserEntryDto userEntryDto) {
+    public static User userDtoToUser(AddUserDto userEntryDto) {
 
         return User.builder()
                 .name(userEntryDto.getName())

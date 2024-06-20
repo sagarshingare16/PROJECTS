@@ -10,7 +10,7 @@ public class ShowTransformer {
     public static Show showDtoToShow(AddShowDto showEntryDto) {
 
         return Show.builder()
-                .time(String.valueOf(showEntryDto.getShowStartTime()))
+                .time(LocalDate.parse(String.valueOf(showEntryDto.getShowStartTime())))
                 .date(LocalDate.parse(String.valueOf(showEntryDto.getShowDate())))
                 .build();
     }

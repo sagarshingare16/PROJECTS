@@ -29,7 +29,7 @@ public class AdminService {
     private TheaterRepository theaterRepository;
 
 
-    public String addMovie(MovieEntryDto movieEntryDto) throws MovieAlreadyPresentWithSameNameAndLanguage {
+    public String addMovie(AddMovieDto movieEntryDto) throws MovieAlreadyPresentWithSameNameAndLanguage {
         if(movieRepository.findByMovieName(movieEntryDto.getMovieName()) != null) {
             if(movieRepository.findByMovieName(movieEntryDto.getMovieName()).getLanguage().equals(movieEntryDto.getLanguage())){
                 throw new MovieAlreadyPresentWithSameNameAndLanguage();
@@ -40,7 +40,7 @@ public class AdminService {
         return "The movie has been added successfully";
     }
 
-    public String addShow(ShowEntryDto showEntryDto) throws MovieDoesNotExists, TheaterDoesNotExists {
+    public String addShow(AddShowDto showEntryDto) throws MovieDoesNotExists, TheaterDoesNotExists {
         Show show = ShowTransformer.showDtoToShow(showEntryDto);
 
         Optional<Movie> movieOpt = movieRepository.findById(showEntryDto.getMovieId());
@@ -68,7 +68,7 @@ public class AdminService {
         return "Show has been added Successfully";
     }
 
-    public String associateShowSeats(ShowSeatEntryDto showSeatEntryDto) throws ShowDoesNotExists {
+    public String associateShowSeats(AddSeatDto showSeatEntryDto) throws ShowDoesNotExists {
         Optional<Show> showOpt = showRepository.findById(showSeatEntryDto.getShowId());
         if(showOpt.isEmpty()) {
             throw new ShowDoesNotExists();
@@ -101,14 +101,14 @@ public class AdminService {
         return "Show seats have been associated successfully";
     }
 
-    public String addTheater(TheaterEntryDto theaterEntryDto){
-        Theater theater = TheaterTransformer.theaterDtoToTheater(theaterEntryDto);
+    public String addTheater(AddTheaterDto addTheaterDto){
+        Theater theater = TheaterTransformer.theaterDtoToTheater(addTheaterDto);
 
         theaterRepository.save(theater);
         return "Theater has been saved Successfully";
     }
 
-    public String addTheaterSeat(TheaterSeatEntryDto entryDto){
+    public String addTheaterSeat(AddTheaterSeatDto entryDto){
         Integer noOfSeatsInRow = entryDto.getNoOfSeatInRow();
         Integer noOfPremiumSeats = entryDto.getNoOfPremiumSeat();
         Integer noOfClassicSeat = entryDto.getNoOfClassicSeat();
