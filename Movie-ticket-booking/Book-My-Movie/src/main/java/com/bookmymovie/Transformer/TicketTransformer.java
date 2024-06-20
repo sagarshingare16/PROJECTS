@@ -17,7 +17,7 @@ public class TicketTransformer {
                 .theaterName(show.getTheater().getName())
                 .movieName(show.getMovie().getMovieName())
                 .date(show.getDate())
-                .time(LocalTime.from(show.getTime()))
+               // .time(LocalTime.from(show.getTime()))
                 /*.date(LocalDate.parse(show.getDate()))
                 .time(LocalTime.parse(show.getTime()))*/
                 .totalPrice(ticket.getTotalTicketsPrice())
