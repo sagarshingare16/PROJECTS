@@ -21,5 +21,5 @@ public class TicketResponseDto {
     private String theaterName;
     private String address;
     private String bookedSeats;
-    private Integer totalPrice;
+    private double totalPrice;
 }

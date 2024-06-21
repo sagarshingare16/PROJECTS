@@ -1,5 +1,6 @@
 package com.bookmymovie.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,15 +8,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "SHOWS")
+@Table(name = "show_details")
 @Data
 @Builder
 @NoArgsConstructor
@@ -25,19 +24,23 @@ public class Show {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer showId;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDate time;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    private LocalTime time;
 
-    @DateTimeFormat(pattern = "dd-mm-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate  date;
+
     @ManyToOne
     @JoinColumn
     private Movie movie;
+
     @ManyToOne
     @JoinColumn
     private Theater theater;
+
     @OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
     private List<ShowSeat> showSeatList = new ArrayList<>();
+
     @OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
     private List<Ticket> ticketList = new ArrayList<>();
 }

@@ -1,17 +1,15 @@
-package com.bookmymovie.Transformer;
+package com.bookmymovie.builder;
 
 import com.bookmymovie.dto.RequestDtos.AddShowDto;
 import com.bookmymovie.entity.Show;
-
-import java.time.LocalDate;
 
 public class ShowTransformer {
 
     public static Show showDtoToShow(AddShowDto showEntryDto) {
 
         return Show.builder()
-                .time(LocalDate.parse(String.valueOf(showEntryDto.getShowStartTime())))
-                .date(LocalDate.parse(String.valueOf(showEntryDto.getShowDate())))
+                .time(showEntryDto.getShowStartTime())
+                .date(showEntryDto.getShowDate())
                 .build();
     }
 }

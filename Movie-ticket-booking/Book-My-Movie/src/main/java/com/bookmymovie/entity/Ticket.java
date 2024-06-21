@@ -7,12 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "TICKETS")
+@Table(name = "tickets_details")
 @Data
 @Builder
 @NoArgsConstructor
@@ -22,7 +20,9 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ticketId;
-    private Integer totalTicketsPrice;
+
+    private double totalTicketsPrice;
+
     private String bookedSeats;
 
     @CreationTimestamp

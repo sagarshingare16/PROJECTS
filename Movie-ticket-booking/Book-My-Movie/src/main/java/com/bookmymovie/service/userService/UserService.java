@@ -1,7 +1,7 @@
 package com.bookmymovie.service.userService;
 
-import com.bookmymovie.Transformer.TicketTransformer;
-import com.bookmymovie.Transformer.UserTransformer;
+import com.bookmymovie.builder.TicketTransformer;
+import com.bookmymovie.builder.UserTransformer;
 import com.bookmymovie.dto.RequestDtos.AddUserDto;
 import com.bookmymovie.dto.ResponseDtos.TicketResponseDto;
 import com.bookmymovie.entity.Ticket;

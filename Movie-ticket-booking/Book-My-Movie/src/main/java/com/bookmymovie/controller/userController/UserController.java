@@ -32,7 +32,7 @@ public class UserController {
         return new ResponseEntity<>(ticketService.ticketBooking(bookTicketDto),HttpStatus.CREATED);
     }
 
-    @GetMapping("/allTickets/{userId}")
+    @GetMapping("/all-tickets/{userId}")
     public ResponseEntity<List<TicketResponseDto>> allTickets(@PathVariable Integer userId) {
         return new ResponseEntity<>(userService.allTickets(userId),HttpStatus.OK);
     }

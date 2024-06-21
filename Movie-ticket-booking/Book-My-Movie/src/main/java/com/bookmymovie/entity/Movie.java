@@ -10,13 +10,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "MOVIES")
+@Table(name = "movie_details")
 @Data
 @Builder
 @NoArgsConstructor
@@ -27,9 +26,9 @@ public class Movie {
     private Integer id;
     @Column(nullable = false)
     private String movieName;
-    private Integer duration;
+    private double duration;
     @Column(scale = 2)
-    private Double rating;
+    private double rating;
 
     @DateTimeFormat(pattern = "dd-mm-yyyy")
     private LocalDate releaseDate;

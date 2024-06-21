@@ -1,8 +1,8 @@
 package com.bookmymovie.service.adminService;
 
-import com.bookmymovie.Transformer.MovieTransformer;
-import com.bookmymovie.Transformer.ShowTransformer;
-import com.bookmymovie.Transformer.TheaterTransformer;
+import com.bookmymovie.builder.MovieTransformer;
+import com.bookmymovie.builder.ShowTransformer;
+import com.bookmymovie.builder.TheaterTransformer;
 import com.bookmymovie.dto.RequestDtos.*;
 import com.bookmymovie.entity.*;
 import com.bookmymovie.enums.SeatType;
@@ -68,7 +68,7 @@ public class AdminService {
         return "Show has been added Successfully";
     }
 
-    public String associateShowSeats(AddSeatDto showSeatEntryDto) throws ShowDoesNotExists {
+    public String addShowTickets(AddSeatDto showSeatEntryDto) throws ShowDoesNotExists {
         Optional<Show> showOpt = showRepository.findById(showSeatEntryDto.getShowId());
         if(showOpt.isEmpty()) {
             throw new ShowDoesNotExists();
@@ -80,25 +80,30 @@ public class AdminService {
 
         List<ShowSeat> showSeatList = show.getShowSeatList();
         for(TheaterSeat theaterSeat : theaterSeatList) {
-            ShowSeat showSeat = new ShowSeat();
-            showSeat.setSeatNo(theaterSeat.getSeatNo());
-            showSeat.setSeatType(theaterSeat.getSeatType());
-
-            if(showSeat.getSeatType().equals(SeatType.CLASSIC)) {
-                showSeat.setPrice((showSeatEntryDto.getPriceOfClassicSeat()));
-            } else {
-                showSeat.setPrice(showSeatEntryDto.getPriceOfPremiumSeat());
-            }
-
-            showSeat.setShow(show);
-            showSeat.setIsAvailable(Boolean.TRUE);
-            showSeat.setIsFoodContains(Boolean.FALSE);
+            ShowSeat showSeat = getShowSeat(showSeatEntryDto, theaterSeat, show);
 
             showSeatList.add(showSeat);
         }
         showRepository.save(show);
 
         return "Show seats have been associated successfully";
+    }
+
+    private static ShowSeat getShowSeat(AddSeatDto showSeatEntryDto, TheaterSeat theaterSeat, Show show) {
+        ShowSeat showSeat = new ShowSeat();
+        showSeat.setSeatNo(theaterSeat.getSeatNo());
+        showSeat.setSeatType(theaterSeat.getSeatType());
+
+        if(showSeat.getSeatType().equals(SeatType.CLASSIC)) {
+            showSeat.setPrice((showSeatEntryDto.getPriceOfClassicSeat()));
+        } else {
+            showSeat.setPrice(showSeatEntryDto.getPriceOfPremiumSeat());
+        }
+
+        showSeat.setShow(show);
+        showSeat.setIsAvailable(Boolean.TRUE);
+        showSeat.setIsFoodContains(Boolean.FALSE);
+        return showSeat;
     }
 
     public String addTheater(AddTheaterDto addTheaterDto){

@@ -1,4 +1,4 @@
-package com.bookmymovie.Transformer;
+package com.bookmymovie.builder;
 
 
 import com.bookmymovie.dto.RequestDtos.AddTheaterDto;

@@ -18,28 +18,28 @@ public class AdminController {
     AdminService adminService;
 
 
-    @PostMapping("/addMovie")
-        public ResponseEntity<String> addNewMovie(@RequestBody AddMovieDto addMovieDto){
+    @PostMapping("/add-movie")
+        public ResponseEntity<String> addMovie(@RequestBody AddMovieDto addMovieDto){
         return new ResponseEntity<>(adminService.addMovie(addMovieDto), HttpStatus.CREATED);
     }
 
-    @PostMapping("/addShow")
+    @PostMapping("/add-show")
     public ResponseEntity<String> addShow(@RequestBody AddShowDto addShowDto) {
         return new ResponseEntity<>(adminService.addShow(addShowDto),HttpStatus.CREATED);
     }
 
-    @PostMapping("/associateSeats")
-    public ResponseEntity<String> associateShowSeats(@RequestBody AddSeatDto addSeatDto) {
-        return new ResponseEntity<>(adminService.associateShowSeats(addSeatDto),HttpStatus.CREATED);
+    @PostMapping("/add-show-tickets")
+    public ResponseEntity<String> addShowTickets(@RequestBody AddSeatDto addSeatDto) {
+        return new ResponseEntity<>(adminService.addShowTickets(addSeatDto),HttpStatus.CREATED);
     }
 
-    @PostMapping("/addTheater")
+    @PostMapping("/add-theater")
     public ResponseEntity<String> addTheater(@RequestBody AddTheaterDto addTheaterDto) {
         return new ResponseEntity<>(adminService.addTheater(addTheaterDto),HttpStatus.CREATED);
     }
 
-    @PostMapping("/addTheaterSeat")
-    public ResponseEntity<String> addTheaterSeat(@RequestBody AddTheaterSeatDto addTheaterSeatDto) {
+    @PostMapping("/add-theater-seats")
+    public ResponseEntity<String> addTheaterSeats(@RequestBody AddTheaterSeatDto addTheaterSeatDto) {
         return new ResponseEntity<>(adminService.addTheaterSeat(addTheaterSeatDto),HttpStatus.CREATED);
     }
 }
