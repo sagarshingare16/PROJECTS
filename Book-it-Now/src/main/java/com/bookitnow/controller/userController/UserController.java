@@ -3,7 +3,7 @@ package com.bookitnow.controller.userController;
 import com.bookitnow.dto.TicketBookingdto;
 import com.bookitnow.dto.Userdto;
 import com.bookitnow.dto.TicketResponsedto;
-import com.bookitnow.service.userService.TicketService;
+import com.bookitnow.service.ticketService.TicketService;
 import com.bookitnow.service.userService.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

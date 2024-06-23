@@ -5,10 +5,7 @@ import com.bookitnow.builder.ShowBuilder;
 import com.bookitnow.builder.TheaterBuilder;
 import com.bookitnow.dto.*;
 import com.bookitnow.enums.SeatType;
-import com.bookitnow.exception.MovieAlreadyPresent;
-import com.bookitnow.exception.ShowNotExits;
-import com.bookitnow.exception.TheaterAlreadyPresent;
-import com.bookitnow.exception.TheaterNotExits;
+import com.bookitnow.exception.*;
 import com.bookitnow.model.*;
 import com.bookitnow.repository.MovieRepository;
 import com.bookitnow.repository.ShowRepository;
@@ -109,13 +106,19 @@ public class AdminServiceImpl implements AdminService{
     public String addShow(Showdto showdto) {
         Optional<Movie> movieOpt= movieRepository.findById(showdto.getMovieId());
         if(movieOpt.isEmpty()){
-            throw new ShowNotExits();
+            throw new MovieNotExits();
         }
         Optional<Theater> theaterOpt = theaterRepository.findById(showdto.getTheaterId());
         if(theaterOpt.isEmpty()){
             throw new TheaterNotExits();
         }
+
         Show show = ShowBuilder.showDtoToShow(showdto);
+
+        if(show.getShowTime() == showdto.getShowTime()){
+            throw new ShowAlreadyExitsAtSameTime();
+        }
+
         Movie movie = movieOpt.get();
         Theater theater = theaterOpt.get();
 

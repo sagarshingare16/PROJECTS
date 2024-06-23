@@ -1,4 +1,4 @@
-package com.bookitnow.service.userService;
+package com.bookitnow.service.ticketService;
 
 import com.bookitnow.builder.TicketRespBuilder;
 import com.bookitnow.dto.TicketBookingdto;
@@ -11,6 +11,7 @@ import com.bookitnow.model.ShowSeat;
 import com.bookitnow.model.Ticket;
 import com.bookitnow.model.User;
 import com.bookitnow.repository.*;
+import com.bookitnow.service.emailService.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,9 @@ public class TicketService {
 
     @Autowired
     private TheaterRepository theaterRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     public synchronized TicketResponsedto bookTicket(TicketBookingdto ticketBookingdto){
         Optional<User> userOpt = userRepository.findById(ticketBookingdto.getUserId());
@@ -69,6 +73,8 @@ public class TicketService {
         show.getTicketList().add(ticket);
         userRepository.save(user);
         showRepository.save(show);
+
+        emailService.sendEmailToUser(user,show,seats);
 
         return TicketRespBuilder.bookedTicketToUser(show,ticket);
     }
