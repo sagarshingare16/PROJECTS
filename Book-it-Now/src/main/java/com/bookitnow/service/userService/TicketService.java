@@ -32,7 +32,7 @@ public class TicketService {
     @Autowired
     private TheaterRepository theaterRepository;
 
-    public TicketResponsedto bookTicket(TicketBookingdto ticketBookingdto){
+    public synchronized TicketResponsedto bookTicket(TicketBookingdto ticketBookingdto){
         Optional<User> userOpt = userRepository.findById(ticketBookingdto.getUserId());
         if(userOpt.isEmpty()) {
             throw new RuntimeException();
