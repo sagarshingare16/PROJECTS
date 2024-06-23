@@ -5,6 +5,8 @@ import com.bookitnow.builder.UserBuilder;
 
 import com.bookitnow.dto.Userdto;
 import com.bookitnow.dto.TicketResponsedto;
+import com.bookitnow.exception.UserAlreadyRegistered;
+import com.bookitnow.exception.UserNotExits;
 import com.bookitnow.model.Ticket;
 import com.bookitnow.model.User;
 import com.bookitnow.repository.UserRepository;
@@ -23,7 +25,7 @@ public class UserServiceImpl implements UserService{
 
     public String registerUser(Userdto addUserdto){
         if(userRepository.findByUserEmailId(addUserdto.getUserEmailId()) != null){
-            throw new RuntimeException();
+            throw new UserAlreadyRegistered();
         }
         User user = UserBuilder.userDtoToUser(addUserdto);
         userRepository.save(user);
@@ -33,7 +35,7 @@ public class UserServiceImpl implements UserService{
     public List<TicketResponsedto> allBookedTickets(Integer userId){
         Optional<User> userOpt = userRepository.findById(userId);
         if(userOpt.isEmpty()) {
-            throw new RuntimeException();
+            throw new UserNotExits();
         }
         User user = userOpt.get();
         List<Ticket> ticketList = user.getTicketList();

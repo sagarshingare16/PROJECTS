@@ -3,6 +3,9 @@ package com.bookitnow.service.userService;
 import com.bookitnow.builder.TicketRespBuilder;
 import com.bookitnow.dto.TicketBookingdto;
 import com.bookitnow.dto.TicketResponsedto;
+import com.bookitnow.exception.RequestedSeatNotAvailable;
+import com.bookitnow.exception.ShowNotExits;
+import com.bookitnow.exception.UserNotExits;
 import com.bookitnow.model.Show;
 import com.bookitnow.model.ShowSeat;
 import com.bookitnow.model.Ticket;
@@ -35,18 +38,18 @@ public class TicketService {
     public synchronized TicketResponsedto bookTicket(TicketBookingdto ticketBookingdto){
         Optional<User> userOpt = userRepository.findById(ticketBookingdto.getUserId());
         if(userOpt.isEmpty()) {
-            throw new RuntimeException();
+            throw new UserNotExits();
         }
         Optional<Show> showOpt = showRepository.findById(ticketBookingdto.getShowId());
         if(showOpt.isEmpty()) {
-            throw new RuntimeException();
+            throw new ShowNotExits();
         }
 
         User user = userOpt.get();
         Show show = showOpt.get();
 
         if(!isSeatAvailable(show.getShowSeatList(),ticketBookingdto.getRequestedSeats())){
-            throw  new RuntimeException();
+            throw new RequestedSeatNotAvailable();
         }
 
         Integer getPriceAndAssignSeats = getPriceAndAssignSeats(show.getShowSeatList(),ticketBookingdto.getRequestedSeats());

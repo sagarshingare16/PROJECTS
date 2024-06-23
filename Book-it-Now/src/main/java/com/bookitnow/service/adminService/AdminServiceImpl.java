@@ -5,6 +5,10 @@ import com.bookitnow.builder.ShowBuilder;
 import com.bookitnow.builder.TheaterBuilder;
 import com.bookitnow.dto.*;
 import com.bookitnow.enums.SeatType;
+import com.bookitnow.exception.MovieAlreadyPresent;
+import com.bookitnow.exception.ShowNotExits;
+import com.bookitnow.exception.TheaterAlreadyPresent;
+import com.bookitnow.exception.TheaterNotExits;
 import com.bookitnow.model.*;
 import com.bookitnow.repository.MovieRepository;
 import com.bookitnow.repository.ShowRepository;
@@ -29,9 +33,9 @@ public class AdminServiceImpl implements AdminService{
     private TheaterRepository theaterRepository;
 
     @Override
-    public String addMovie(Moviedto addMoviedto) {
+    public String addMovie(Moviedto addMoviedto){
         if(movieRepository.findByMovieName(addMoviedto.getMovieName()) != null){
-            throw new RuntimeException();
+            throw new MovieAlreadyPresent();
         }
         Movie movie = MovieBuilder.movieDtoToMovie(addMoviedto);
         movieRepository.save(movie);
@@ -41,7 +45,7 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public String addTheater(Theaterdto theaterdto) {
         if(theaterRepository.findByTheaterName(theaterdto.getTheaterName()) != null){
-            throw new RuntimeException();
+            throw new TheaterAlreadyPresent();
         }
         Theater theater = TheaterBuilder.theaterDtoToTheater(theaterdto);
         theaterRepository.save(theater);
@@ -105,11 +109,11 @@ public class AdminServiceImpl implements AdminService{
     public String addShow(Showdto showdto) {
         Optional<Movie> movieOpt= movieRepository.findById(showdto.getMovieId());
         if(movieOpt.isEmpty()){
-            throw new RuntimeException();
+            throw new ShowNotExits();
         }
         Optional<Theater> theaterOpt = theaterRepository.findById(showdto.getTheaterId());
         if(theaterOpt.isEmpty()){
-            throw new RuntimeException();
+            throw new TheaterNotExits();
         }
         Show show = ShowBuilder.showDtoToShow(showdto);
         Movie movie = movieOpt.get();
@@ -132,7 +136,7 @@ public class AdminServiceImpl implements AdminService{
     public String addShowTickets(ShowTicketdto showTicketdto) {
         Optional<Show> showOpt = showRepository.findById(showTicketdto.getShowId());
         if(showOpt.isEmpty()){
-            throw new RuntimeException();
+            throw new ShowNotExits();
         }
 
         Show show = showOpt.get();
