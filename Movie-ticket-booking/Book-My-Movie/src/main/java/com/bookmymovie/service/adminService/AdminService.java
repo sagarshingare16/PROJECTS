@@ -29,6 +29,7 @@ public class AdminService {
     private TheaterRepository theaterRepository;
 
 
+
     public String addMovie(AddMovieDto movieEntryDto) throws MovieAlreadyPresentWithSameNameAndLanguage {
         if(movieRepository.findByMovieName(movieEntryDto.getMovieName()) != null) {
             if(movieRepository.findByMovieName(movieEntryDto.getMovieName()).getLanguage().equals(movieEntryDto.getLanguage())){
