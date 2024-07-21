@@ -1,5 +1,6 @@
 package com.bookitnow.service.userService;
 
+import com.bookitnow.dto.Moviedto;
 import com.bookitnow.dto.Userdto;
 import com.bookitnow.dto.TicketResponsedto;
 import org.springframework.stereotype.Service;
@@ -10,4 +11,6 @@ import java.util.List;
 public interface UserService {
     String registerUser(Userdto addUserdto);
     List<TicketResponsedto> allBookedTickets(Integer userId);
+    List<Moviedto> getAllMovies();
+    Moviedto getMovieByName(String movieName);
 }

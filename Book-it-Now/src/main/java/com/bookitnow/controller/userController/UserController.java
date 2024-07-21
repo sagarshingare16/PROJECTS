@@ -1,5 +1,6 @@
 package com.bookitnow.controller.userController;
 
+import com.bookitnow.dto.Moviedto;
 import com.bookitnow.dto.TicketBookingdto;
 import com.bookitnow.dto.Userdto;
 import com.bookitnow.dto.TicketResponsedto;
@@ -35,5 +36,15 @@ public class UserController {
     @GetMapping("/all-tickets/{userId}")
     public ResponseEntity<List<TicketResponsedto>> allBookedTickets(@PathVariable Integer userId) {
         return new ResponseEntity<>(userService.allBookedTickets(userId),HttpStatus.OK);
+    }
+
+    @GetMapping("/movies")
+    public ResponseEntity<List<Moviedto>> getAllMovies(){
+        return new ResponseEntity<>(userService.getAllMovies(),HttpStatus.OK);
+    }
+
+    @GetMapping("/movies/{movieName}")
+    public ResponseEntity<Moviedto> getMovieByName(@PathVariable String movieName){
+        return new ResponseEntity<>(userService.getMovieByName(movieName),HttpStatus.OK);
     }
 }
